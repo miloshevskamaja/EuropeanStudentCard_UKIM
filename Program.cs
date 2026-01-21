@@ -1,13 +1,39 @@
+using EuropeanStudentCard.Data;
+using EuropeanStudentCard.Interfaces;
+using EuropeanStudentCard.Services;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+var sqliteConnection = new SqliteConnection("DataSource=:memory:");
+sqliteConnection.Open();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// --- ESC Integration Services ---
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(sqliteConnection));
+
+
+builder.Services.AddHttpClient();
+
+builder.Services.AddScoped<IEscRouterClient, EscRouterClient>();
+builder.Services.AddScoped<ICardService, CardService>();
+// --------------------------------
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.EnsureCreated(); // ✅ creates Students table
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

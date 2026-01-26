@@ -1,13 +1,15 @@
 ﻿[
   {
-    "index": "221095",
-    "name": "Maja",
-    "surname": "Miloshevska",
-    "email": "majamiloshevska7@gmail.com",
+    "index": "221133",
+    "name": "Jovan",
+    "surname": "Jovanov",
+    "email": "jovanjovanov@gmail.com",
+    "phone": "+38970202020",
+    "address": "ul. Partizanska 120, Skopje, Macedonia",
     "status": 1,
-    "enrolment": 2022,
-    "program": "SIIS",
-    "gpa": 9.14,
-    "ects": 174
+    "enrollmentYear": 2022,
+    "programmeName": "SIIS",
+    "gpa": 9.10,
+    "ects": 162
   }
 ]

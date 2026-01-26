@@ -1,4 +1,6 @@
-﻿using EuropeanStudentCard.Clients_iKnow;
+﻿using EuropeanStudentCard.Api.Errors;
+using EuropeanStudentCard.Clients_iKnow;
+using EuropeanStudentCard.Services_IKnow.Eligibility;
 using EuropeanStudentCard.Validation_iKnow;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,53 +12,96 @@ namespace EuropeanStudentCard.Controllers_iKnow
     {
         private readonly iKnowClient _client;
         private readonly IKnowStudentValidator _validator;
+        private readonly IEscEligibilityService _eligibility;
 
-        public IKnowMockController(iKnowClient client, IKnowStudentValidator validator)
+        public IKnowMockController(
+            iKnowClient client,
+            IKnowStudentValidator validator,
+            IEscEligibilityService eligibility)
         {
             _client = client;
             _validator = validator;
+            _eligibility = eligibility;
         }
 
+        // Returns a student by index/ID from the mock iKnow system and validates the payload.
         [HttpGet("studentsbyIndex/{studentId}")]
-        public async Task<IActionResult> GetStudent(string studentId, CancellationToken ct)
-        {
-            var student = await _client.GetStudentByIndexAsync(studentId, ct);
-            if (student is null) return NotFound();
-
-            var result = await _validator.ValidateAsync(student, ct);
-            if (!result.IsValid)
-                return BadRequest(result.Errors.Select(e => new { e.PropertyName, e.ErrorMessage }));
-
-            return Ok(student);
-        }
-
-        [HttpGet("students/{studentId}")]
-        public async Task<IActionResult> GetStudentbyStatus(string studentId, CancellationToken ct)
+        public async Task<IActionResult> GetStudentByIndex(string studentId, CancellationToken ct)
         {
             var student = await _client.GetStudentByIndexAsync(studentId, ct);
             if (student is null)
-                return NotFound(new { message = "Student not found." });
+            {
+                return NotFound(new ApiErrorResponse
+                {
+                    Code = ApiErrorCodes.StudentNotFound,
+                    Message = "Student not found.",
+                    Details = new { studentId }
+                });
+            }
 
             var validationResult = await _validator.ValidateAsync(student, ct);
             if (!validationResult.IsValid)
-                return BadRequest(validationResult.Errors.Select(e => new
-                {
-                    e.PropertyName,
-                    e.ErrorMessage
-                }));
-
-          
-            if (student.status != 1)
             {
-                return StatusCode(StatusCodes.Status403Forbidden, new
+                return BadRequest(new ApiErrorResponse
                 {
-                    message = "ESC card is valid only for active/regular students."
+                    Code = ApiErrorCodes.ValidationFailed,
+                    Message = "Validation failed for student payload.",
+                    Details = validationResult.Errors.Select(e => new
+                    {
+                        e.PropertyName,
+                        e.ErrorMessage
+                    })
                 });
             }
 
             return Ok(student);
         }
 
+        // Returns a student only if they are eligible for ESC (regular students: Status = 1).
+        [HttpGet("students/{studentId}")]
+        public async Task<IActionResult> GetStudentEligibleForEsc(string studentId, CancellationToken ct)
+        {
+            var student = await _client.GetStudentByIndexAsync(studentId, ct);
+            if (student is null)
+            {
+                return NotFound(new ApiErrorResponse
+                {
+                    Code = ApiErrorCodes.StudentNotFound,
+                    Message = "Student not found.",
+                    Details = new { studentId }
+                });
+            }
+
+            var validationResult = await _validator.ValidateAsync(student, ct);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(new ApiErrorResponse
+                {
+                    Code = ApiErrorCodes.ValidationFailed,
+                    Message = "Validation failed for student payload.",
+                    Details = validationResult.Errors.Select(e => new
+                    {
+                        e.PropertyName,
+                        e.ErrorMessage
+                    })
+                });
+            }
+
+            var eligibility = _eligibility.CheckEligibility(student);
+            if (!eligibility.IsEligible)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, new ApiErrorResponse
+                {
+                    Code = ApiErrorCodes.StudentNotEligible,
+                    Message = eligibility.Reason ?? "Student is not eligible for ESC.",
+                    Details = new { studentId, status = student.status }
+                });
+            }
+
+            return Ok(student);
+        }
+
+        // Returns all regular students from the mock iKnow system.
         [HttpGet("students")]
         public async Task<IActionResult> GetActiveStudents(CancellationToken ct)
         {

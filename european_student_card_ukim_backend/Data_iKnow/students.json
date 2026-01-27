@@ -1,0 +1,15 @@
+﻿[
+  {
+    "index": "221133",
+    "name": "Jovan",
+    "surname": "Jovanov",
+    "email": "jovanjovanov@gmail.com",
+    "phone": "+38970202020",
+    "address": "ul. Partizanska 120, Skopje, Macedonia",
+    "status": 1,
+    "enrollmentYear": 2022,
+    "programmeName": "SIIS",
+    "gpa": 9.10,
+    "ects": 162
+  }
+]

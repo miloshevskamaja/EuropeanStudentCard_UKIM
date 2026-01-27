@@ -21,7 +21,7 @@ namespace EuropeanStudentCard.Validation_iKnow
 
             RuleFor(x => x.status)
                 .NotEmpty()
-                .Must(s => s == 1 || s == 0)
+                .Must(s => s == 1 || s == -1)
                 .WithMessage("Status must be 'Active (1)' or 'Inactive (0)'.");
 
             RuleFor(x => x.email)

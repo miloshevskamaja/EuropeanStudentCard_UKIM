@@ -11,5 +11,18 @@
     "programmeName": "SIIS",
     "gpa": 9.10,
     "ects": 162
+  },
+  {
+    "index": "223311",
+    "name": "Ivan",
+    "surname": "Ivanov",
+    "email": "ivanivanov@gmail.com",
+    "phone": "+38970101010",
+    "address": "ul. Partizanska 100, Skopje, Macedonia",
+    "status": -1,
+    "enrollmentYear": 2022,
+    "programmeName": "PIT",
+    "gpa": 9.00,
+    "ects": 170
   }
 ]

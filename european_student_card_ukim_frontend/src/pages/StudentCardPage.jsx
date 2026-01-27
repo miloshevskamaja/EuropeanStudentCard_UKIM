@@ -1,7 +1,8 @@
-import React, {useMemo} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import {useLang} from "../context/LangContext.jsx";
 import {STRINGS} from "../i18n/strings.js";
+import useIKnow from "../hooks/useIKnow.js";
 
 export default function StudentCardPage() {
     const {lang} = useLang();
@@ -9,35 +10,64 @@ export default function StudentCardPage() {
     const nav = useNavigate();
     const {token} = useParams();
 
-    const studentsByToken = useMemo(
-        () => ({
-            "ukim-demo-token-123": {
-                fullName: "Јован Јовановски",
-                faculty:
-                    "Факултет за информатички науки и компјутерско инженерство (ФИНКИ)",
-                program: "Софтверско инженерство и информациски системи",
-                index: "221133",
-                credits: "162",
-                semester: "7",
-                enrollmentYear: "2022",
-                studyMode: "Редовен",
-                address: "ул. Партизански Одреди бр. 120",
-                email: "jovan.jovanovsk@gmail.com",
-                gpa: "9.10",
-                phone: "070 123 456",
-            },
-        }),
-        []
-    );
+    const {getStudentByIndex, loading} = useIKnow();
 
-    const student = studentsByToken[token];
+    const [student, setStudent] = useState(null);
+    const [notFound, setNotFound] = useState(false);
+
+    useEffect(() => {
+        if (!token) return;
+
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setNotFound(false);
+        setStudent(null);
+
+        getStudentByIndex(token)
+            .then((data) => {
+                if (!data) {
+                    setNotFound(true);
+                    return;
+                }
+                setStudent(data);
+            })
+            .catch(() => setNotFound(true));
+    }, [token, getStudentByIndex]);
+
+    const viewModel = useMemo(() => {
+        if (!student) return null;
+
+        const isRegular = student.status === 1;
+        const isExtraordinary = student.status === -1;
+
+        return {
+            fullName: `${student.name ?? ""} ${student.surname ?? ""}`.trim(),
+            index: student.index ?? "",
+            program: student.programmeName ?? "",
+            enrollmentYear: student.enrollmentYear ?? "",
+            credits: student.ects ?? "",
+            gpa: student.gpa ?? "",
+            email: student.email ?? "",
+            phone: student.phone ?? "",
+            address: student.address ?? "",
+            studyMode: isRegular ? "Редовен" : isExtraordinary ? "Вонреден" : "",
+            isValid: isRegular,
+        };
+    }, [student]);
+
+    const isValid = viewModel?.isValid === true;
 
     return (
         <div className="container">
             <div className="verify-top">
-                <div className="status-pill">
+                <div className={`status-pill ${isValid ? "" : "invalid"}`}>
                     <span className="status-dot"/>
-                    <span className="status-text">{t.statusValid}</span>
+                    <span className="status-text">
+            {loading
+                ? t.loading ?? "Loading..."
+                : viewModel
+                    ? (isValid ? t.statusValid : (t.statusInvalid ?? "NOT VALID"))
+                    : (notFound ? t.notFoundStudent : "")}
+          </span>
                 </div>
 
                 <button className="ghost-btn" onClick={() => nav("/")}>
@@ -45,16 +75,22 @@ export default function StudentCardPage() {
                 </button>
             </div>
 
-            <section className="verify-hero">
+            <section className={`verify-hero ${isValid ? "" : "invalid"}`}>
                 <h2 className="verify-title">{t.certified}</h2>
                 <p className="verify-sub">
-                    {student ? "Identity verified via student-specific QR token." : t.notFoundStudent}
+                    {loading
+                        ? (t.loading ?? "Loading...")
+                        : viewModel
+                            ? (isValid
+                                ? "Identity verified via student index."
+                                : (t.notEligibleEsc ?? "Student is not eligible to use ESC (part-time status)."))
+                            : (notFound ? t.notFoundStudent : "")}
                 </p>
             </section>
 
-            {student && (
+            {viewModel && (
                 <section className="card-wrap">
-                    <div className="student-card">
+                    <div className={`student-card ${isValid ? "" : "card-invalid"}`}>
                         <div className="card-head">
                             <div className="card-mark">
                                 <div className="ukim-logo small"/>
@@ -62,62 +98,50 @@ export default function StudentCardPage() {
 
                             <div className="card-head-text">
                                 <div className="card-title">{t.cardTitle}</div>
-                                <div className="card-subtitle">
-                                    UKIM • European Student Card
-                                </div>
+                                <div className="card-subtitle">UKIM • European Student Card</div>
                             </div>
 
-                            <div className="chip-valid">{t.statusValid}</div>
+                            <div className={`chip-valid ${isValid ? "" : "chip-invalid"}`}>
+                                {isValid ? t.statusValid : (t.statusInvalid ?? "NOT VALID")}
+                            </div>
                         </div>
 
                         <div className="card-body">
                             <div className="row">
-                                <Field label={t.labels.fullName} value={student.fullName}/>
-                                <Field label={t.labels.index} value={student.index}/>
+                                <Field label={t.labels.fullName} value={viewModel.fullName}/>
+                                <Field label={t.labels.index} value={viewModel.index}/>
                             </div>
 
                             <div className="row">
-                                <Field label={t.labels.faculty} value={student.faculty}/>
-                                <Field label={t.labels.program} value={student.program}/>
+                                <Field label={t.labels.program} value={viewModel.program}/>
+                                <Field label={t.labels.enrollmentYear} value={viewModel.enrollmentYear}/>
                             </div>
 
                             <div className="row">
-                                <Field label={t.labels.credits} value={student.credits}/>
-                                <Field label={t.labels.semester} value={student.semester}/>
+                                <Field label={t.labels.credits} value={viewModel.credits}/>
+                                <Field label={t.labels.gpa} value={viewModel.gpa}/>
                             </div>
 
                             <div className="row">
-                                <Field
-                                    label={t.labels.enrollmentYear}
-                                    value={student.enrollmentYear}
-                                />
-                                <Field label={t.labels.studyMode} value={student.studyMode}/>
+                                <Field label={t.labels.studyMode} value={viewModel.studyMode}/>
+                                <Field label={t.labels.email} value={viewModel.email}/>
                             </div>
 
                             <div className="row">
-                                <Field
-                                    className="span-2"
-                                    label={t.labels.address}
-                                    value={student.address}
-                                />
+                                <Field className="span-2" label={t.labels.address} value={viewModel.address}/>
                             </div>
 
                             <div className="row">
-                                <Field label={t.labels.email} value={student.email}/>
-                                <Field label={t.labels.gpa} value={student.gpa}/>
-                            </div>
-
-                            <div className="row">
-                                <Field
-                                    className="span-2"
-                                    label={t.labels.phone}
-                                    value={student.phone}
-                                />
+                                <Field className="span-2" label={t.labels.phone} value={viewModel.phone}/>
                             </div>
                         </div>
 
                         <div className="card-foot">
-                            <div className="foot-note">{t.footerNote}</div>
+                            <div className="foot-note">
+                                {isValid
+                                    ? t.footerNote
+                                    : (t.footerNoteInvalid ?? "This student card is not valid for ESC benefits.")}
+                            </div>
                         </div>
                     </div>
                 </section>

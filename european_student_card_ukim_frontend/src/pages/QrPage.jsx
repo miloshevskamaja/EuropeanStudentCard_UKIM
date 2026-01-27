@@ -7,7 +7,7 @@ export default function QrPage() {
     const {lang} = useLang();
     const t = STRINGS[lang];
 
-    const token = "ukim-demo-token-123";
+    const token = "221133";
 
     const verifyUrl = useMemo(() => {
         const origin = window.location.origin;

@@ -25,7 +25,7 @@ namespace EuropeanStudentCard.Controllers_iKnow
         }
 
         // Returns a student by index/ID from the mock iKnow system and validates the payload.
-        [HttpGet("studentsbyIndex/{studentId}")]
+        [HttpGet("studentsByIndex/{studentId}")]
         public async Task<IActionResult> GetStudentByIndex(string studentId, CancellationToken ct)
         {
             var student = await _client.GetStudentByIndexAsync(studentId, ct);

@@ -85,3 +85,19 @@ appsettings.*.local.json
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+# .NET
+**/bin/
+**/obj/
+*.user
+*.suo
+.vs/
+bin/
+obj/
+
+# Node / React
+**/node_modules/
+**/dist/
+**/build/
+.env
+.env.local

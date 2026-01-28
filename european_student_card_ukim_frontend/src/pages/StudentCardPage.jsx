@@ -82,8 +82,8 @@ export default function StudentCardPage() {
                         ? (t.loading ?? "Loading...")
                         : viewModel
                             ? (isValid
-                                ? "Identity verified via student index."
-                                : (t.notEligibleEsc ?? "Student is not eligible to use ESC (part-time status)."))
+                                ? (t.validStudent)
+                                : (t.notEligibleEsc ?? t.notValidStudent))
                             : (notFound ? t.notFoundStudent : "")}
                 </p>
             </section>
@@ -98,7 +98,7 @@ export default function StudentCardPage() {
 
                             <div className="card-head-text">
                                 <div className="card-title">{t.cardTitle}</div>
-                                <div className="card-subtitle">UKIM • European Student Card</div>
+                                <div className="card-subtitle">{t.subtitle}</div>
                             </div>
 
                             <div className={`chip-valid ${isValid ? "" : "chip-invalid"}`}>

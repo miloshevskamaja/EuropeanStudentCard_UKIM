@@ -11,7 +11,7 @@ namespace EuropeanStudentCard.Clients
 
         public MockIKnowClient(IWebHostEnvironment env)
         {
-            var path = Path.Combine(env.ContentRootPath, "Data_iKnow", "students.json");
+            var path = Path.Combine(env.ContentRootPath, "Data", "iKnowMockData", "students.json");
             var json = File.ReadAllText(path);
 
             var options = new JsonSerializerOptions

@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {useLang} from "../context/LangContext.jsx";
 import {useTheme} from "../context/ThemeContext.jsx";
 import {STRINGS} from "../i18n/strings.js";
+import ukimLogo from "../assets/ukim-logo-white.svg"
 
 export default function Header() {
     const {lang, setLang} = useLang();
@@ -24,7 +25,7 @@ export default function Header() {
         <header className="topbar">
             <div className="topbar-inner">
                 <div className="topbar-left">
-                    <div className="ukim-logo" aria-label="UKIM logo"/>
+                    <div className="ukim-logo" aria-label="UKIM logo"><img src={ukimLogo} alt="UKIM Logo"/></div>
                 </div>
 
                 <div className="topbar-center">

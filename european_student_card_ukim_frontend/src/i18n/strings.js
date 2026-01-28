@@ -4,28 +4,17 @@ export const STRINGS = {
         headerTitle: "Европска Студентска Картичка",
 
         login: "Најави се",
-        subtitle: "UKIM • European Student Card (Demo)",
+        subtitle: "УКИМ • Европска Студентска Картичка",
+
+        heroText: "Европска Студентска Картичка за редовните студенти при Универзитетот „Св. Кирил и Методиј“ во Скопје",
 
         afterLoginTitle: "Твој QR код",
-        afterLoginHint:
-            "Овој QR код (демо) води до верификација. Во реална верзија ќе се генерира по студент/токен.",
         scanHint: "Ако го скенираш, ќе отвори:",
         openVerify: "Отвори верификација",
 
         certified: "Сертифициран студент на УКИМ",
         statusValid: "VALID",
         cardTitle: "Студентска Картичка",
-
-        demoPreviewTitle: "Преглед",
-        demoHowTitle: "Како работи",
-        demoPreviewItems: ["Responsive layout", "MK/EN label-и", "QR → verification page"],
-        demoHowItems: [
-            "QR кодот содржи URL до /verify/:token",
-            "Scanner отвора web страница (оваа апликација)",
-            "Страната прикажува “Certified” + студентска картичка",
-        ],
-        demoHowNote:
-            "Подоцна: /verify/:token ќе повикува API за да земе податоци според токенот.",
 
         labels: {
             fullName: "Име и презиме",
@@ -42,10 +31,12 @@ export const STRINGS = {
             phone: "Телефон",
         },
 
-        footerNote:
-            "Демо интерфејс (хардкод). Податоците подоцна се вчитуваат од ASP.NET Core API.",
+        footerNote: `© ${new Date().getFullYear()} Универзитет „Св. Кирил и Методиј“ во Скопје`,
         notFoundStudent: "Непознат/невалиден QR токен.",
         backToHome: "Назад",
+
+        validStudent: "Верификуван преку студентски индекс.",
+        notValidStudent: "Студентот нема дозвола да поседува студентска картичка (вонреден).",
     },
 
     en: {
@@ -53,28 +44,17 @@ export const STRINGS = {
         headerTitle: "European Student Card",
 
         login: "Log in",
-        subtitle: "UKIM • European Student Card (Demo)",
+        subtitle: "UKIM • European Student Card",
+
+        heroText: "European Student Card for full-time students at Ss. Cyril and Methodius University in Skopje",
 
         afterLoginTitle: "Your QR code",
-        afterLoginHint:
-            "This demo QR code opens the verification page. In production it will be generated per student/token.",
         scanHint: "When scanned, it opens:",
         openVerify: "Open verification",
 
         certified: "Certified UKIM student",
         statusValid: "VALID",
         cardTitle: "Student Card",
-
-        demoPreviewTitle: "Preview",
-        demoHowTitle: "How it works",
-        demoPreviewItems: ["Responsive layout", "MK/EN labels", "QR → verification page"],
-        demoHowItems: [
-            "The QR contains a URL to /verify/:token",
-            "A scanner opens the web page (this app)",
-            "The page shows “Certified” + a student card",
-        ],
-        demoHowNote:
-            "Later: /verify/:token will call the API and fetch data by token.",
 
         labels: {
             fullName: "Full name",
@@ -91,9 +71,11 @@ export const STRINGS = {
             phone: "Phone",
         },
 
-        footerNote:
-            "Demo UI (hardcoded). Later the data will be fetched from ASP.NET Core API.",
+        footerNote: `© ${new Date().getFullYear()} Ss. Cyril and Methodius University in Skopje`,
         notFoundStudent: "Unknown/invalid QR token.",
         backToHome: "Back",
+
+        validStudent: "Identity verified via student index.",
+        notValidStudent: "Student is not eligible to use ESC (part-time status).",
     },
 };

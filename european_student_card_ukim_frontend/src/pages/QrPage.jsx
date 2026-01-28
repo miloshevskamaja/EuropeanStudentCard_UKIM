@@ -19,7 +19,7 @@ export default function QrPage() {
             <div className="grid-2">
                 <section className="panel">
                     <h2 className="panel-title">{t.afterLoginTitle}</h2>
-                    <p className="panel-text">{t.afterLoginHint}</p>
+                    <p className="panel-text"></p>
 
                     <div className="qr-wrap">
                         <div className="qr-card">
@@ -36,16 +36,6 @@ export default function QrPage() {
                         </div>
                     </div>
                 </section>
-
-                <aside className="panel subtle">
-                    <div className="mini-title">{t.demoHowTitle}</div>
-                    <ul className="nice-list">
-                        {t.demoHowItems.map((x) => (
-                            <li key={x}>{x}</li>
-                        ))}
-                    </ul>
-                    <div className="note">{t.demoHowNote}</div>
-                </aside>
             </div>
         </div>
     );

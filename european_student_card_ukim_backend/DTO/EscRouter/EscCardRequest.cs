@@ -8,8 +8,7 @@ public class EscCardRequest
     // ESCN
     [JsonPropertyName("cardNumber")]
     public string CardNumber { get; set; } = string.Empty;
-
-    //ESI 
+ 
     [JsonPropertyName("personIdentifier")]
     public string PersonIdentifier { get; set; } = string.Empty;
 

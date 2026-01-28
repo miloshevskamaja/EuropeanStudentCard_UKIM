@@ -4,7 +4,6 @@ namespace EuropeanStudentCard.DTO.EscRouter;
 
 public class EscPersonRequest
 {
-    // ESI
     [JsonPropertyName("identifier")]
     public string Identifier { get; set; } = string.Empty;
 

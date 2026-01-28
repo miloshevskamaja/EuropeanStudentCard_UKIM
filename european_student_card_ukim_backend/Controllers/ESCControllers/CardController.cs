@@ -82,7 +82,7 @@ public class CardController : ControllerBase
         }
     }
 
-    // Get all cards from the local database.
+    // Get all cards from the local database
     [HttpGet]
     public async Task<IActionResult> GetAllCards()
     {
@@ -125,7 +125,7 @@ public class CardController : ControllerBase
         }
     }
     
-    // Get QR code image for a card.
+    // Get QR code image for a card
     [HttpGet("{cardNumber}/qr")]
     public async Task<IActionResult> GetQrCode(string cardNumber)
     {
@@ -179,7 +179,7 @@ public class CardController : ControllerBase
         }
     }
     
-    // Revoke/delete a card.    
+    // Revoke/delete a card
     [HttpDelete("{cardNumber}")]
     public async Task<IActionResult> RevokeCard(string cardNumber)
     {

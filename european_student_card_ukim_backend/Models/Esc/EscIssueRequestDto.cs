@@ -10,6 +10,5 @@
         public string LastName { get; set; } = default!;
         public string? Email { get; set; }
         public string? StudyProgram { get; set; }
-
     }
 }

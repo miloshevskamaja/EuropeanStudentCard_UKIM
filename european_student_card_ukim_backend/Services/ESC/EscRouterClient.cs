@@ -33,6 +33,8 @@ public class EscRouterClient : IEscRouterClient
         };
     }
 
+    // Card Endpoints
+
     public async Task<string> GenerateEscnAsync(CancellationToken cancellationToken = default)
     {
         try
@@ -375,7 +377,7 @@ public class EscRouterClient : IEscRouterClient
         }
     }
 
-    // ==================== Person Endpoints ====================
+    // Person Endpoints
 
     public async Task<List<EscPersonResponse>> GetAllPersonsAsync(CancellationToken cancellationToken = default)
     {

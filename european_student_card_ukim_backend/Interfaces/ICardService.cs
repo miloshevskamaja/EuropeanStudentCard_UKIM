@@ -3,9 +3,6 @@ using EuropeanStudentCard.Models;
 
 namespace EuropeanStudentCard.Interfaces
 {
-    /// <summary>
-    /// Service interface for managing European Student Cards.
-    /// </summary>
     public interface ICardService
     {
         Task<StudentCard> GenerateCardAsync(int studentId, CancellationToken cancellationToken = default);

@@ -1,6 +1,6 @@
-﻿using EuropeanStudentCard.Models_iKnow;
+﻿using EuropeanStudentCard.DTO.iKnow;
 
-namespace EuropeanStudentCard.Services_IKnow.Eligibility
+namespace EuropeanStudentCard.Services.iKnow.Eligibility
 {
     public class EscEligibilityService : IEscEligibilityService
     {

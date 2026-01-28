@@ -1,7 +1,7 @@
-﻿using EuropeanStudentCard.Models_iKnow;
-using System.Net.Http.Headers;
+﻿using System.Net.Http.Headers;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using EuropeanStudentCard.DTO.iKnow;
 
 namespace EuropeanStudentCard.Clients_iKnow
 {

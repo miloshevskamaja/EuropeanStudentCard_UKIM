@@ -1,7 +1,4 @@
 using EuropeanStudentCard.Clients_iKnow;
-using EuropeanStudentCard.Mocks_iKnow;
-using EuropeanStudentCard.Validation_iKnow;
-using EuropeanStudentCard.Services_IKnow.Eligibility;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 using System.Text.Json.Serialization;
@@ -9,7 +6,10 @@ using System.Text.Json.Serialization;
 using EuropeanStudentCard.Data;
 using EuropeanStudentCard.Configuration;
 using EuropeanStudentCard.Interfaces;
-using EuropeanStudentCard.Services;
+using EuropeanStudentCard.Clients;
+using EuropeanStudentCard.Services.iKnow.Eligibility;
+using EuropeanStudentCard.Services.ESC;
+using EuropeanStudentCard.Api.Validation;
 
 var builder = WebApplication.CreateBuilder(args);
 

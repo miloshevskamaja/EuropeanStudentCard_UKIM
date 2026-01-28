@@ -1,7 +1,7 @@
-﻿using EuropeanStudentCard.Models_iKnow;
+﻿using EuropeanStudentCard.DTO.iKnow;
 using FluentValidation;
 
-namespace EuropeanStudentCard.Validation_iKnow
+namespace EuropeanStudentCard.Api.Validation
 {
     public class IKnowStudentValidator : AbstractValidator<IKnowStudentDto>
     {

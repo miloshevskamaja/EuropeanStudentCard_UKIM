@@ -1,4 +1,4 @@
-﻿namespace EuropeanStudentCard.Models_iKnow.Esc
+﻿namespace EuropeanStudentCard.Models.Esc
 {
     public class EscIssueRequestDto
     {

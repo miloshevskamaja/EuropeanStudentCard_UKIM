@@ -1,4 +1,4 @@
-﻿using EuropeanStudentCard.Models_iKnow;
+﻿using EuropeanStudentCard.DTO.iKnow;
 
 namespace EuropeanStudentCard.Clients_iKnow
 {

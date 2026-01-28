@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace EuropeanStudentCard.Exceptions;
+namespace EuropeanStudentCard.Api.Exceptions;
 
 /// <summary>
 /// Custom exception for ESC Router API errors.

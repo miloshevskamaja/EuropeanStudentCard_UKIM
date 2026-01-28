@@ -1,5 +1,5 @@
-﻿using EuropeanStudentCard.Models_iKnow.Esc;
-using EuropeanStudentCard.Models_iKnow;
+﻿using EuropeanStudentCard.Models.Esc;
+using EuropeanStudentCard.DTO.iKnow;
 
 namespace EuropeanStudentCard.Mapping
 {

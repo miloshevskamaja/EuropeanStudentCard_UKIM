@@ -6,7 +6,7 @@ using EuropeanStudentCard.Interfaces;
 using EuropeanStudentCard.Models;
 using Microsoft.Extensions.Options;
 
-namespace EuropeanStudentCard.Services;
+namespace EuropeanStudentCard.Services.ESC;
 
 
 public class CardService : ICardService
@@ -87,7 +87,7 @@ public class CardService : ICardService
             };
 
             var response = await _escRouterClient.CreateCardAsync(request, cancellationToken);
-            
+
             if (response != null)
             {
                 newCard.CardStatusType = "ACTIVE";
@@ -132,9 +132,9 @@ public class CardService : ICardService
     }
 
     public async Task<StudentCard?> UpdateCardAsync(
-        string cardNumber, 
-        string cardStatusType, 
-        DateTime? expiresAt = null, 
+        string cardNumber,
+        string cardStatusType,
+        DateTime? expiresAt = null,
         CancellationToken cancellationToken = default)
     {
         var card = await _context.StudentCards
@@ -233,7 +233,7 @@ public class CardService : ICardService
         }
     }
 
-  
+
     private static string GenerateEsi(int studentId)
     {
         return $"urn:schac:personalUniqueCode:int:esi:MK:UKIM:{studentId}";

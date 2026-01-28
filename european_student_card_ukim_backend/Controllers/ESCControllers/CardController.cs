@@ -6,7 +6,7 @@ using EuropeanStudentCard.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace EuropeanStudentCard.Controllers;
+namespace EuropeanStudentCard.Controllers.ESCControllers;
 
 
 [ApiController]

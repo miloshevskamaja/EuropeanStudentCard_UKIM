@@ -1,10 +1,10 @@
 ﻿using EuropeanStudentCard.Api.Errors;
+using EuropeanStudentCard.Api.Validation;
 using EuropeanStudentCard.Clients_iKnow;
-using EuropeanStudentCard.Services_IKnow.Eligibility;
-using EuropeanStudentCard.Validation_iKnow;
+using EuropeanStudentCard.Services.iKnow.Eligibility;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EuropeanStudentCard.Controllers_iKnow
+namespace EuropeanStudentCard.Controllers.iKnowControllers
 {
     [ApiController]
     [Route("mock/iknow")]

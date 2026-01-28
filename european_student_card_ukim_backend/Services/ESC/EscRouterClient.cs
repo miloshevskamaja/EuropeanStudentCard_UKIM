@@ -1,13 +1,13 @@
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using EuropeanStudentCard.Api.Exceptions;
 using EuropeanStudentCard.Configuration;
 using EuropeanStudentCard.DTO.EscRouter;
-using EuropeanStudentCard.Exceptions;
 using EuropeanStudentCard.Interfaces;
 using Microsoft.Extensions.Options;
 
-namespace EuropeanStudentCard.Services;
+namespace EuropeanStudentCard.Services.ESC;
 
 
 public class EscRouterClient : IEscRouterClient

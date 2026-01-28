@@ -1,4 +1,4 @@
-﻿namespace EuropeanStudentCard.Models_iKnow
+﻿namespace EuropeanStudentCard.DTO.iKnow
 {
     public class IKnowStudentDto
     {

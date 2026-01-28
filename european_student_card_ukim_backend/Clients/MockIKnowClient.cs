@@ -1,9 +1,9 @@
 ﻿using EuropeanStudentCard.Clients_iKnow;
-using EuropeanStudentCard.Models_iKnow;
+using EuropeanStudentCard.DTO.iKnow;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace EuropeanStudentCard.Mocks_iKnow
+namespace EuropeanStudentCard.Clients
 {
     public class MockIKnowClient : iKnowClient
     {

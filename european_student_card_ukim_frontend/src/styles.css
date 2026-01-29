@@ -102,6 +102,7 @@ html[data-theme="light"] .topbar {
 .topbar-left, .topbar-right {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 12px;
     min-width: 140px;
     position: relative;
@@ -338,7 +339,7 @@ html[data-theme="light"] .knob {
 }
 
 .grid-2 {
-    width: 1000px;
+    width: min(var(--max), calc(100% - 32px));
 }
 
 @media (max-width: 920px) {
@@ -360,7 +361,7 @@ html[data-theme="light"] .knob {
 }
 
 .hero {
-    width: 1000px;
+    width: min(var(--max), calc(100% - 32px));
 }
 
 @media (max-width: 920px) {

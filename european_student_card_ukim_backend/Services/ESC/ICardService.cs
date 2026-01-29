@@ -1,7 +1,7 @@
 using EuropeanStudentCard.DTO.EscRouter;
 using EuropeanStudentCard.Models;
 
-namespace EuropeanStudentCard.Interfaces
+namespace EuropeanStudentCard.Services.ESC
 {
     public interface ICardService
     {

@@ -1,11 +1,11 @@
 using EuropeanStudentCard.DTO.EscRouter;
 using EuropeanStudentCard.Models;
 
-namespace EuropeanStudentCard.Interfaces
+namespace EuropeanStudentCard.Clients.EscClients
 {
 
     public interface IEscRouterClient
-    {    
+    {
         // Card Endpoints 
         Task<string> GenerateEscnAsync(CancellationToken cancellationToken = default);
         Task<EscCardResponse?> CreateCardAsync(EscCardRequest request, CancellationToken cancellationToken = default);
@@ -15,7 +15,7 @@ namespace EuropeanStudentCard.Interfaces
         Task<bool> DeleteCardAsync(string escn, CancellationToken cancellationToken = default);
         Task<byte[]?> GetQrCodeAsync(string escn, CancellationToken cancellationToken = default);
         Task<EscCardStatusResponse?> GetCardStatusAsync(string escn, CancellationToken cancellationToken = default);
-        
+
         // Person Endpoints 
         Task<List<EscPersonResponse>> GetAllPersonsAsync(CancellationToken cancellationToken = default);
         Task<EscPersonResponse?> CreatePersonAsync(EscPersonRequest request, CancellationToken cancellationToken = default);

@@ -1,6 +1,6 @@
 ﻿using EuropeanStudentCard.Api.Errors;
 using EuropeanStudentCard.Api.Validation;
-using EuropeanStudentCard.Clients_iKnow;
+using EuropeanStudentCard.Clients.iKnowClients;
 using EuropeanStudentCard.Services.iKnow.Eligibility;
 using Microsoft.AspNetCore.Mvc;
 

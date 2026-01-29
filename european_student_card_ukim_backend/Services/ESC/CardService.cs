@@ -2,9 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using EuropeanStudentCard.Configuration;
 using EuropeanStudentCard.Data;
 using EuropeanStudentCard.DTO.EscRouter;
-using EuropeanStudentCard.Interfaces;
 using EuropeanStudentCard.Models;
 using Microsoft.Extensions.Options;
+using EuropeanStudentCard.Clients.EscClients;
 
 namespace EuropeanStudentCard.Services.ESC;
 

@@ -2,9 +2,9 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 using EuropeanStudentCard.Api.Exceptions;
+using EuropeanStudentCard.Clients.EscClients;
 using EuropeanStudentCard.Configuration;
 using EuropeanStudentCard.DTO.EscRouter;
-using EuropeanStudentCard.Interfaces;
 using Microsoft.Extensions.Options;
 
 namespace EuropeanStudentCard.Services.ESC;

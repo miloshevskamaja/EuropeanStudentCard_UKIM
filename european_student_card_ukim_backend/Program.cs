@@ -1,15 +1,14 @@
-using EuropeanStudentCard.Clients_iKnow;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 using System.Text.Json.Serialization;
 
 using EuropeanStudentCard.Data;
 using EuropeanStudentCard.Configuration;
-using EuropeanStudentCard.Interfaces;
-using EuropeanStudentCard.Clients;
 using EuropeanStudentCard.Services.iKnow.Eligibility;
 using EuropeanStudentCard.Services.ESC;
 using EuropeanStudentCard.Api.Validation;
+using EuropeanStudentCard.Clients.iKnowClients;
+using EuropeanStudentCard.Clients.EscClients;
 
 var builder = WebApplication.CreateBuilder(args);
 

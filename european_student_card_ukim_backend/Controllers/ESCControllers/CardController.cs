@@ -1,8 +1,8 @@
 using EuropeanStudentCard.Data;
 using EuropeanStudentCard.DTO;
 using EuropeanStudentCard.DTO.EscRouter;
-using EuropeanStudentCard.Interfaces;
 using EuropeanStudentCard.Models;
+using EuropeanStudentCard.Services.ESC;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

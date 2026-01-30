@@ -2,8 +2,9 @@
 {
     public class EscIssueRequestDto
     {
+        // Internal DTO representing ESC-related student data decoupled from the ESC Router API specification.
 
-        // these variables depend on the ESC specification
+        // these variables may be changed 
         public string ExternalStudentId { get; set; } = default!;
 
         public string FirstName { get; set; } = default!;
